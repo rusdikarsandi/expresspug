@@ -41,7 +41,7 @@ router.get('/hitapi', (req, res) => {
   var url = 'http://localhost/greviacom/api/user';
   // var hitapi = 'http://localhost/greviacom/api/user';
 
-  res.render('general/hitapi', {
+  res.render('ejs/hitapi', {
     hitapi: url,
     ayam: 'goreng'
   });
@@ -56,6 +56,22 @@ router.get('/hitapi', (req, res) => {
 
   // res.send('ayam ');
   // res.send(fetchData(url));
+})
+
+router.get('/sampleloop', (req, res) => {
+  // index page
+  var mascots = [
+    { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+    { name: 'Tux', organization: "Linux", birth_year: 1996},
+    { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+  ];
+  var tagline = "No programming concept is complete without a cute animal mascot.";
+  console.log(tagline);
+  res.render('ejs/modular/sampleloop', {
+    mascots: mascots,
+    tagline: tagline
+  });
+
 })
 
 router.get('/mantab', (req, res) => {
