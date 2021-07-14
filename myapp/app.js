@@ -7,16 +7,20 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var dotenv = require('dotenv').config();
 
+// REGISTER ROUTES   
+// like a controllers
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
+// REGISTER DATABASE CONNECTION
+// NO NEED IF USING API
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "wal"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 con.connect(function (err) {
@@ -83,7 +87,7 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Oopooopsy daisy... Page Not Found');
   err.status = 404;
   next(err);
 });
