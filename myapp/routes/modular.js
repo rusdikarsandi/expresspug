@@ -1,6 +1,7 @@
+const { default: axios } = require('axios');
 var express = require('express');
-// var axios = require('axios');
 var router = express.Router();
+// var axios = require('axios');
 
 // declare 
 var axioshitRoutes = require('./modularRoutes/axioshit');
@@ -11,15 +12,55 @@ router
     })
     .use('/axioshit', axioshitRoutes);
 
+router.get('/about', function(req, res) {
+    res.render('ejs/modular/about');
+})
+
 router.get('/hitapi', (req, res) => {
     // res.send('cetak!');
-    // var url = 'http://api.grevialabs.com/';
-    var url = 'http://localhost/greviacom/api/user';
+    var url = 'http://api.grevialabs.com/';
+    // var url = 'http://localhost/greviacom/api/user';
     // var hitapi = 'http://localhost/greviacom/api/user';
+
+    var resdata;
+    var apimessage;
+
+    async function hitdata() {
+      try {
+        const {data: resp} = await axios.get(url);
+        return resp.data.message;
+      } catch (error) { 
+        console.log(error);
+      }
+    }
+
+    // axios
+    // .get(url)
+    // .then(function (response) {
+    //   // console.log(response);
+    //   var resdata = response.data.message ;
+    //   // resdata = JSON.stringify(response);
+    //   console.log('ini resdata');
+    //   console.log(resdata);
+    //   apimessage = response.data;
+    // })
+    // .catch(function (error) {
+    //   consol e.log(error)
+    // });
+
+    // console.log(hitdata()); 
+    resdata = hitdata();
   
+    // console.log('tes hitapi ');
+    // console.log('resdata');
+    // console.log(resdata);
+    // console.log(resdata);
+    // console.log(resdata);
     res.render('ejs/modular/hitapi', {
       hitapi: url,
-      ayam: 'goreng'
+      ayam: 'goreng',
+      apimessage: apimessage,
+      resdata: resdata
     });
   
 });

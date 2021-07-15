@@ -1,3 +1,4 @@
+var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,11 +12,11 @@ var app = express();
 
 // REGISTER ROUTES   
 // like a controllers
-var index = require('./routes/index');
-// var users = require('./routes/users');
+var indexRoutes = require('./routes/index');
 var modularRoutes = require('./routes/modular');
 
-// app.use('/modular', modularRoutes);
+app.use(indexRoutes);
+app.use(modularRoutes);
 
 // REGISTER DATABASE CONNECTION
 // NO NEED IF USING API
@@ -68,18 +69,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/modular', modularRoutes);
-
-// app.get('/ayam', function(res, req){
-//   res.render('ayamgoreng');
-// })
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  var err = new Error('Oopooopsy daisy... Page Not Found');
-  err.status = 404;
-  next(err);
+  // var err = new Error('Oopooopsy daisy... Page Not Found');
+  // err.status = 404;
+  // next(err);
+  next(createError(404));
 });
 
 // error handler

@@ -3,7 +3,7 @@ var router = express.Router();
 var axios = require('axios');
 
 router.get('/', (req, res) => {
-    res.send('yametefrom axios hit');
+    res.render('./ejs/modular/axioshit');
 });
 
 module.exports = router;

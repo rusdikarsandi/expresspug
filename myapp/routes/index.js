@@ -27,4 +27,8 @@ router.get('/', (req, res) => {
   res.send('Hello from Express!')
 })
 
+router.get('/ayam', (req, res) => {
+  res.send('ayamose!')
+})
+
 module.exports = router;
