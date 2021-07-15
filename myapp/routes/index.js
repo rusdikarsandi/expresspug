@@ -41,7 +41,7 @@ router.get('/hitapi', (req, res) => {
   var url = 'http://localhost/greviacom/api/user';
   // var hitapi = 'http://localhost/greviacom/api/user';
 
-  res.render('ejs/hitapi', {
+  res.render('ejs/modular/hitapi', {
     hitapi: url,
     ayam: 'goreng'
   });
